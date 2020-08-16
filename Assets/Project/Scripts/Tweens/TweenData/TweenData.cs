@@ -5,7 +5,7 @@ public class TweenData<T> {
 
     public bool Enabled { get => _enabled; }
     public Ease TweenEase { get => _ease; }
-    public float TweenDuration { get => _duration; }
+    public float TweenDuration { get => Enabled ? _duration : 0f; }
     public float TweenDelay { get => _delay; }
 
     public bool TweenLoop { get => _loop; }

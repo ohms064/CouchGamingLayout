@@ -25,7 +25,7 @@ public class DinoTween : MonoBehaviour {
     }
 
     [Button, DisableInEditorMode]
-    public virtual void Appear ( DinoTweenData data ) {
+    public virtual void Appear ( DinoTweenData data, System.Action endCallback = null ) {
         foreach ( var activeTween in _activeTweens ) {
             activeTween.Kill();
         }
@@ -47,6 +47,12 @@ public class DinoTween : MonoBehaviour {
             if ( !data.Color.UsePreviousValue ) spriteRenderer.color = data.Color.InitialValue;
             var tween = spriteRenderer.DOColor( data.Color.EndValue, data.Color.TweenDuration );
             ConfigureTween( tween, data.Color );
+        }
+
+        if ( endCallback != null ) {
+            float t = 0;
+            var timerTween = DOTween.To( () => t, ( x ) => t = x, 1f, data.TweenDuration );
+            timerTween.OnComplete( endCallback.Invoke );
         }
     }
 

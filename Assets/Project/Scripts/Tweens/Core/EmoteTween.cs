@@ -11,13 +11,13 @@ public class EmoteTween : DinoTween {
     private bool _requireReset;
 
     [Button, DisableInEditorMode]
-    public override void Appear ( DinoTweenData data ) {
+    public override void Appear ( DinoTweenData data, System.Action callback = null ) {
         if ( _requireReset ) {
             ResetTarget();
             _requireReset = false;
         }
         StopAllCoroutines();
-        base.Appear( data );
+        base.Appear( data, callback );
         var emoteTweenData = data as EmoteTweenData;
         if ( emoteTweenData == null ) return;
 

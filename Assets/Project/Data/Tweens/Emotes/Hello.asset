@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a78b7c1faa51af74085d0b3cdac46109, type: 3}
-  m_Name: Love
+  m_Name: Hello
   m_EditorClassIdentifier: 
   _movement:
     _enabled: 1
@@ -37,7 +37,7 @@ MonoBehaviour:
   _color:
     _enabled: 1
     _ease: 5
-    _duration: 0.1
+    _duration: 0.05
     _delay: 0
     _loop: 0
     _loopType: 0
@@ -45,5 +45,5 @@ MonoBehaviour:
     _usePreviousValue: 0
     _initialValue: {r: 1, g: 1, b: 1, a: 0}
     _endValue: {r: 1, g: 1, b: 1, a: 1}
-  _emoteSprite: {fileID: 21300000, guid: 24179721bdbed2b42946697d26f46310, type: 3}
-  _spriteHideTime: 1.5
+  _emoteSprite: {fileID: 21300000, guid: 14d379545abc12b48bb1ba426fa3480f, type: 3}
+  _spriteHideTime: 0.5

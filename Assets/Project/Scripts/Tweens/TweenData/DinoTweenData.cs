@@ -10,6 +10,12 @@ public class DinoTweenData : ScriptableObject {
     public Vector3TweenData Scale { get => _scale; }
     public ColorTweenData Color { get => _color; }
 
+    public virtual float TweenDuration {
+        get {
+            return Mathf.Max( Movement.TweenDuration, Scale.TweenDuration, Color.TweenDuration );
+        }
+    }
+
     [SerializeField, Title ("Movement"), HideLabel]
     private Vector3TweenData _movement = new Vector3TweenData ();
 
