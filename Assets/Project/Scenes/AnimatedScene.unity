@@ -3287,12 +3287,12 @@ GameObject:
   - component: {fileID: 827761706}
   - component: {fileID: 827761709}
   m_Layer: 0
-  m_Name: FB_Connection
+  m_Name: FB_Web
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &827761706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9828,13 +9828,14 @@ GameObject:
   - component: {fileID: 1463068329}
   - component: {fileID: 1463068328}
   - component: {fileID: 1463068327}
+  - component: {fileID: 1463068330}
   m_Layer: 0
   m_Name: FB_SDK
   m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1463068327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9876,6 +9877,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1463068330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1463068326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744e776c6fb3cca418b4d192dbc8b6c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CommentReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1486392792
 GameObject:
   m_ObjectHideFlags: 0
@@ -11296,10 +11312,10 @@ RectTransform:
   m_Father: {fileID: 1518203717}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2015325639
 GameObject:
@@ -11555,3 +11571,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050213451}
   m_CullTransparentMesh: 0
+--- !u!1 &2085584050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2085584052}
+  - component: {fileID: 2085584051}
+  m_Layer: 0
+  m_Name: ConsolePro
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2085584051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085584050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6bcfaced529e418bb75980b297fda2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useNATPunch: 0
+  port: 51000
+--- !u!4 &2085584052
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085584050}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 81.71362, y: -52.19751, z: 39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
