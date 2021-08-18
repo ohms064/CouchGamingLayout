@@ -16,10 +16,12 @@ public class DinoSpawner : MonoBehaviour {
     }
 
     [Button, HideInEditorMode]
-    public void Spawn () {
+    public DinoCharacter Spawn ( string avatarName ) {
         if ( _pool.RequestPoolMonoBehaviour( out DinoCharacter dinoCharacter ) ) {
-            dinoCharacter.Spawn( _origin.position, _area );
+            dinoCharacter.Spawn( _origin.position, _area, avatarName );
+            return dinoCharacter;
         }
+        return null;
     }
 
 #if UNITY_EDITOR

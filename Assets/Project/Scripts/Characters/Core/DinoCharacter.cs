@@ -31,9 +31,14 @@ public class DinoCharacter : PoolMonoBehaviour {
     private Tween _moveTween;
     private Coroutine _moveRoutine;
 
+    public bool MovingOut { get; private set; }
+
+    [ShowInInspector, HideInEditorMode, DisableInPlayMode]
+    public TwitchActiveUser TwitchUser { get; private set; } = new TwitchActiveUser();
+
     private float RandomMoveInterval => Random.Range( _moveInterval.x, _moveInterval.y );
 
-    public void Move ( Vector3 target ) {
+    public void Move ( Vector3 target, System.Action onMoveEnd = null ) {
 #if UNITY_EDITOR
         Debug.DrawLine( transform.position, target, Color.red, _moveTime );
 #endif        
@@ -43,6 +48,7 @@ public class DinoCharacter : PoolMonoBehaviour {
         _moveTween.OnStart( OnMoveStart.Invoke );
         _moveTween.OnComplete( () => {
             OnMoveEnd.Invoke();
+            onMoveEnd?.Invoke();
             _moveTween = null;
         } );
         _moveTween.OnKill( () => _moveTween = null );
@@ -52,11 +58,22 @@ public class DinoCharacter : PoolMonoBehaviour {
         if ( _moveTween != null ) _moveTween.Kill();
     }
 
-    public void Spawn ( Vector3 position, MoveArea area ) {
+    public void Spawn ( Vector3 position, MoveArea area, string avatarName ) {
         _moveArea = area;
         Spawn( position );
         OnMoveEnd.AddListener( FirstMove );
         Move( area.RandomLerp() );
+        TwitchUser.Reset( avatarName );
+    }
+
+    public override void Despawn () {
+        base.Despawn();
+        MovingOut = false;
+    }
+
+    public void MoveOut ( System.Action onMoveOut ) {
+        MovingOut = true;
+        Move( _moveArea.Lerp( -1 ), () => { onMoveOut.Invoke(); Despawn(); } );
     }
 
     private void CheckFlip ( Vector3 target ) {
