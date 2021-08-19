@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TwitchLib.Client.Models;
-public class TwitchActiveUser {
+using UnityEngine.Events;
+public class TwitchActiveUser : MonoBehaviour {
+
+    public UnityEvent<string> _onMessageReceived;
+
     public float Time { get; private set; }
 
     public string LastMesage { get; private set; }
@@ -18,6 +22,7 @@ public class TwitchActiveUser {
     public void UpdateMessage ( string message ) {
         LastMesage = message;
         Time = 0f;
+        _onMessageReceived.Invoke( message );
     }
 
     public void Reset ( string name ) {

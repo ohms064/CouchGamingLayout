@@ -9,7 +9,7 @@ using UnityEngine;
 public class TweenManager : SerializedMonoBehaviour {
     [SerializeField]
     private Dictionary<string, DinoTweenData> _emotes = new Dictionary<string, DinoTweenData>();
-    [SerializeField]
+    [SerializeField, HideInInlineEditors]
     private UnityStringEvent _onEmote, _onEmoteEnd;
     private DinoTween _tweens;
 

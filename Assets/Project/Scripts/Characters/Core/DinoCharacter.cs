@@ -7,17 +7,11 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 
 public class DinoCharacter : PoolMonoBehaviour {
-    [ShowInInspector, HideInEditorMode]
-    public bool CanMove {
-        get => _moveRoutine != null;
-        set {
-            if ( _moveRoutine == null && value ) _moveRoutine = StartCoroutine( MoveRoutine() );
-            if ( _moveRoutine != null && !value ) StopCoroutine( _moveRoutine );
-        }
-    }
 
     [SerializeField, Required]
     private Transform _playerBody;
+    [SerializeField, Required]
+    private TwitchActiveUser _twitchUser;
     [SerializeField]
     private float _moveTime;
     [SerializeField, MinMaxSlider( 0f, 10f )]
@@ -31,10 +25,17 @@ public class DinoCharacter : PoolMonoBehaviour {
     private Tween _moveTween;
     private Coroutine _moveRoutine;
 
+    [ShowInInspector, HideInEditorMode]
+    public bool CanMove {
+        get => _moveRoutine != null;
+        set {
+            if ( _moveRoutine == null && value ) _moveRoutine = StartCoroutine( MoveRoutine() );
+            if ( _moveRoutine != null && !value ) StopCoroutine( _moveRoutine );
+        }
+    }
     public bool MovingOut { get; private set; }
 
-    [ShowInInspector, HideInEditorMode, DisableInPlayMode]
-    public TwitchActiveUser TwitchUser { get; private set; } = new TwitchActiveUser();
+    public TwitchActiveUser TwitchUser => _twitchUser;
 
     private float RandomMoveInterval => Random.Range( _moveInterval.x, _moveInterval.y );
 
