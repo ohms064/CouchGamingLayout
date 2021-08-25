@@ -79,7 +79,7 @@ MonoBehaviour:
     _animation: hello
   - _regexPattern: \b(>:c|>:\()
     _animation: angry
-  - _regexPattern: \b(:c|:\()
+  - _regexPattern: \b(:c|:\(|sad)
     _animation: sad
   - _regexPattern: \bno
     _animation: wrong

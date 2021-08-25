@@ -1118,7 +1118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -909.99994, y: -570}
+  m_AnchoredPosition: {x: -910, y: -570}
   m_SizeDelta: {x: 512, y: 256}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &536262855
@@ -1886,6 +1886,7 @@ GameObject:
   - component: {fileID: 800106327}
   - component: {fileID: 800106326}
   - component: {fileID: 800106325}
+  - component: {fileID: 800106324}
   m_Layer: 0
   m_Name: TwitchClient
   m_TagString: Untagged
@@ -1893,6 +1894,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &800106324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800106323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced7af52c69702f469d6f692fac895ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawner: {fileID: 1387305196}
+  _chatUsers: {fileID: 11400000, guid: 072166ee917770b4280bcffa8da36b92, type: 2}
+  _talkingDistance: 0.6
+  _chatTime: 1.2
 --- !u!114 &800106325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,8 +2310,13 @@ MonoBehaviour:
   _pool: {fileID: 1387305197}
   _origin: {fileID: 1790159342}
   _area:
-    start: {x: 0, y: 0, z: 0}
-    end: {x: 2.84, y: 0, z: 1.5}
+    _start: {x: 0, y: 0, z: 0}
+    _end: {x: 3, y: 0, z: 0.5}
+    _magnitude: 3.0413814
+    _direction: {x: 0.98639387, y: 0, z: 0.16439898}
+  _onDinoSpawn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1387305197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2340,6 +2362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawner: {fileID: 1387305196}
   _maxIdleTime: 60
+  _chatUsers: {fileID: 11400000, guid: 072166ee917770b4280bcffa8da36b92, type: 2}
 --- !u!1 &1518203713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2677,6 +2700,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1387305198}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1824715140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1824715142}
+  - component: {fileID: 1824715141}
+  m_Layer: 0
+  m_Name: Coroutiner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1824715141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824715140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26bf0e3570f6de24b8937cb5f95c497e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1824715142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824715140}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1863752746
 GameObject:

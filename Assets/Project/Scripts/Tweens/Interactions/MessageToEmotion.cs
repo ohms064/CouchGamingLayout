@@ -51,6 +51,7 @@ public class EmoteMessage {
 
     private Regex _regex;
 
+    [Button( "Rebuild Regex" ), HideInEditorMode]
     public void BuildRegex () {
         try {
             _regex = new Regex( _regexPattern, RegexOptions.IgnoreCase );
