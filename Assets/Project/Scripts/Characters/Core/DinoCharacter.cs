@@ -12,6 +12,8 @@ public class DinoCharacter : PoolMonoBehaviour {
     private Transform _playerBody;
     [SerializeField, Required]
     private TwitchActiveUser _twitchUser;
+    [SerializeField, Required]
+    private NameTag _tag;
     [SerializeField]
     private float _moveTime;
     [SerializeField, MinMaxSlider( 0f, 10f )]
@@ -25,6 +27,7 @@ public class DinoCharacter : PoolMonoBehaviour {
     private Coroutine _moveRoutine, _resumeRoutine;
 
     public MoveArea MovingLine { get; private set; }
+    public NameTag NameTag => _tag;
     public float MoveTime => _moveTime;
 
     [ShowInInspector, HideInEditorMode]
@@ -43,7 +46,7 @@ public class DinoCharacter : PoolMonoBehaviour {
     private float RandomMoveInterval => Random.Range( _moveInterval.x, _moveInterval.y );
 
     public void Move ( Vector3 target, System.Action onMoveEnd = null ) {
-        if(_moveTween != null ) {
+        if ( _moveTween != null ) {
             _moveTween.Kill( false );
         }
 #if UNITY_EDITOR
@@ -66,24 +69,27 @@ public class DinoCharacter : PoolMonoBehaviour {
         if ( _moveTween != null ) _moveTween.Kill();
     }
 
-    public void Spawn ( Vector3 position, MoveArea area, string avatarName, bool randomMove = true ) {
-        Spawn( position, area.RandomLerp(), area, avatarName );
+    public void Spawn ( Vector3 position, MoveArea area, string avatarName, int priority, bool randomMove = true ) {
+        Spawn( position, area.RandomLerp(), area, avatarName, priority, randomMove );
     }
 
-    public void Spawn ( Vector3 position, Vector3 target, MoveArea area, string avatarName, bool randomMove = true ) {
+    public void Spawn ( Vector3 position, Vector3 target, MoveArea area, string avatarName, int priority, bool randomMove = true ) {
         MovingLine = area;
         Spawn( position );
-        Move( target, ()=> {
+        Move( target, () => {
             OnSpawnComplete.Invoke();
             RandomMove = randomMove;
         } );
         TwitchUser.Reset( avatarName );
         name = $"dino_{avatarName}";
+        _tag.Name = avatarName;
+        _tag.OnSpawn( priority );
     }
 
     public override void Despawn () {
         base.Despawn();
         MovingOut = false;
+        _tag.OnDespawn();
     }
 
     public void MoveOut ( System.Action onMoveOut ) {

@@ -9,6 +9,13 @@
       },
       "hash": "e981cd1424b4ed67ec1ecc1dada4f3df90de7d01"
     },
+    "com.ohms.controllers": {
+      "version": "https://github.com/ohms064/UnityPIDControllers.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "05d6db9f780427249b0481cb6be6ecb2d2e8bec4"
+    },
     "com.ohms.pooling": {
       "version": "https://github.com/oms064/PoolingSystem.git",
       "depth": 0,

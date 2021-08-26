@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.acegikmo.shapes": "https://github.com/acegikmo/Shapes.git",
+    "com.ohms.controllers": "https://github.com/ohms064/UnityPIDControllers.git",
     "com.ohms.pooling": "https://github.com/oms064/PoolingSystem.git",
     "com.ohms.utilities": "https://github.com/oms064/Unity-General-Utilities.git",
     "com.unity.2d.sprite": "1.0.0",
