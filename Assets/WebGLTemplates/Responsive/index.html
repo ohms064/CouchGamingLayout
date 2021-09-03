@@ -13,40 +13,10 @@
         var gameInstance = UnityLoader.instantiate("gameContainer", "%UNITY_WEBGL_BUILD_URL%", { onProgress: UnityProgress });
     </script>
 
-    <!-- Facebook SDK-->
-    <script>
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '3203820583041765',
-                autoLogAppEvents: true,
-                xfbml: true,
-                version: 'v8.0'
-            });
-        };
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-    <script>
-        function checkLoginState() {
-            FB.getLoginStatus(function (response) {
-                console.log(response);
-                if (response.authResponse) gameInstance.SendMessage( //TODO: Check permissions.
-                    "FB_Connection",
-                    "OnSuccessLogin"
-                );
-            });
-        }
-        checkLoginState();
-
-    </script>
 
 </head>
 
 <body>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous"
-        src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v8.0&appId=3203820583041765&autoLogAppEvents=1"
-        nonce="vXz2NGNe"></script>
-
     <div class="webgl-content">
         <div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="default"
             data-auto-logout-link="false" data-use-continue-as="false" data-width="" scope="public_profile,user_videos"
@@ -55,11 +25,7 @@
     <div id="gameContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px"></div>
     <div class="simmer">template by: <a href="https://simmer.io" target="_blank">SIMMER.io</a></div>
     <script src="TemplateData/responsive.javascript"></script>
-    <!-- Global variables -->
-    <script>
-        const tokenId =
-            "EAAth25vGuuUBANfrgxDMQLkQcDabtSkLDwo38RnKevkK7iqUxeHErzdh4zPNncH0tI3Fm4b2X7gSRnNZBFZBVPXeD1uIZCFF3THLIC8H36JtwZCpI6luM7RYtgZBoCdZCQKmo76NB0ZCslZA74ONtVFCRtudqQcUVnxYeLknhvp4xP5ZAWCCIQy40AHNEueWvegevsguYJGOuGRyNVfVI9Cgh";
-    </script>
+
 </body>
 
 </html>

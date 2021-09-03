@@ -4,11 +4,11 @@ using TwitchLib.Unity;
 using UnityEngine;
 using System.Linq;
 using Sirenix.OdinInspector;
-
+using TwitchLib.Client.Events;
 public class TwitchChatManager : TwitchClientEventListener {
 
     [SerializeField]
-    private DinoSpawner _spawner;
+    private CharacterSpawner _spawner;
     [SerializeField]
     private float _maxIdleTime;
 
@@ -19,28 +19,37 @@ public class TwitchChatManager : TwitchClientEventListener {
         connection.OnMessageReceived += Twitch_MessageReceived;
     }
 
-    private void Twitch_MessageReceived ( object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e ) {
+    private void Twitch_MessageReceived ( object sender, OnMessageReceivedArgs e ) {
         Debug.Log( $"Message from {e.ChatMessage.Username}, {e.ChatMessage.Message}, emotes {e.ChatMessage.EmoteSet.Emotes.FirstOrDefault()?.ImageUrl ?? "None"}" );
-        //if ( TwitchChatRespond.HasReply( _chatUsers, e.ChatMessage ) ) {
-        //    Debug.Log( "Chat Has reply" );
-        //    return;
-        //}
+
+        _chatUsers.Updated = false;
+        var chatMessage = BuildCharacterChatMessage( e );
         if ( _chatUsers.ContainsKey( e.ChatMessage.UserId ) ) {
-            _chatUsers[e.ChatMessage.UserId].TwitchUser.UpdateMessage( e.ChatMessage.Message );
-            _chatUsers[e.ChatMessage.UserId].TwitchUser.TalkingTo( e.ChatMessage.ChatReply?.ParentUserId ?? null );
+            _chatUsers[e.ChatMessage.UserId].ChatManager.ReceiveMessage( chatMessage );
         }
         else {
-            var avatar = _spawner.Spawn( e.ChatMessage.Username );
+            var avatar = _spawner.Spawn( chatMessage );
             _chatUsers.Add( e.ChatMessage.UserId, avatar );
         }
+        _chatUsers.Updated = true;
     }
 
     private void FixedUpdate () {
         foreach ( var item in _chatUsers ) {
-            item.Value.TwitchUser.UpdateTime( Time.fixedDeltaTime );
-            if ( item.Value.TwitchUser.Time >= _maxIdleTime && !item.Value.MovingOut ) {
-                item.Value.MoveOut( () => _chatUsers.Remove( item.Key ) );
+            item.Value.UpdateTime( Time.fixedDeltaTime );
+            if ( item.Value.Time >= _maxIdleTime && !item.Value.Movement.MovingOut ) {
+                item.Value.Movement.MoveOut( () => _chatUsers.Remove( item.Key ) );
             }
         }
+    }
+
+    private CharacterChatMessage BuildCharacterChatMessage ( OnMessageReceivedArgs args ) {
+        var chatMessage = args.ChatMessage;
+        var chatReply = chatMessage.ChatReply;
+        CharacterChatMessage parentMessage = null;
+        if ( chatReply != null ) {
+            parentMessage = new CharacterChatMessage( chatReply.ParentMsgBody, chatReply.ParentDisplayName, chatReply.ParentUserId, _chatUsers, null );
+        }
+        return new CharacterChatMessage( chatMessage.Message, chatMessage.DisplayName, chatMessage.UserId, _chatUsers, parentMessage );
     }
 }

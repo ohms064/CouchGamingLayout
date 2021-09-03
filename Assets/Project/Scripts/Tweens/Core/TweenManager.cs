@@ -13,6 +13,8 @@ public class TweenManager : SerializedMonoBehaviour {
     private UnityStringEvent _onEmote, _onEmoteEnd;
     private DinoTween _tweens;
 
+    private Queue<System.Action> _emotionQueue;
+
     private void Awake () {
         _tweens = GetComponent<DinoTween>();
     }
