@@ -4,14 +4,10 @@ using UnityEngine;
 using Shapes;
 using Sirenix.OdinInspector;
 
-[System.Serializable]
-public class MoveArea {
-    [SerializeField, OnValueChanged( "OnStartEndChanged" )]
+[CreateAssetMenu( fileName = "Moving Area", menuName = "Moving Area" )]
+public class MoveArea : ScriptableObject {
+    [SerializeField]
     private Vector3 _start, _end;
-    [SerializeField, DisableInPlayMode, DisableInEditorMode]
-    private float _magnitude;
-    [SerializeField, DisableInPlayMode, DisableInEditorMode]
-    private Vector3 _direction;
 
     [System.NonSerialized]
     public Vector3 origin;
@@ -23,11 +19,6 @@ public class MoveArea {
 
     public Vector3 Lerp ( float t ) {
         return origin + Vector3.Lerp( _start, _end, t );
-    }
-
-    public float Project ( Vector3 position ) {
-        var direction = position - Start;
-        return Vector3.Dot( _direction, direction );
     }
 
     public Vector3 DirectionToEnd ( Vector3 position ) {
@@ -42,17 +33,16 @@ public class MoveArea {
         return Lerp( Random.Range( 0f, 1f ) );
     }
 
+    public void UpdateLine(Vector3 start, Vector3 end ) {
+        _start = start;
+        _end = end;
+    }
+
 #if UNITY_EDITOR
     public void Editor_DrawGizmos ( Vector3 origin ) {
         Draw.LineThickness = 0.05f;
         Draw.Color = Color.blue;
         Draw.Line( origin + _start, origin + _end );
-    }
-
-    private void OnStartEndChanged () {
-        _direction = _end - _start;
-        _magnitude = _direction.magnitude;
-        _direction /= _magnitude;
     }
 #endif
 }

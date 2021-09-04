@@ -38,7 +38,7 @@ public class TwitchChatManager : TwitchClientEventListener {
         foreach ( var item in _chatUsers ) {
             item.Value.UpdateTime( Time.fixedDeltaTime );
             if ( item.Value.Time >= _maxIdleTime && !item.Value.Movement.MovingOut ) {
-                item.Value.Movement.MoveOut( () => _chatUsers.Remove( item.Key ) );
+                item.Value.StartDespawn( () => _chatUsers.Remove( item.Key ) );
             }
         }
     }

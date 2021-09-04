@@ -1,6 +1,5 @@
 using OhmsLibraries.Pooling;
-using System.Collections;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class CharacterHandler : PoolMonoBehaviour {
@@ -13,6 +12,7 @@ public class CharacterHandler : PoolMonoBehaviour {
     [SerializeField]
     private NameTag _tag;
 
+    [ShowInInspector]
     public float Time { get; private set; }
 
     public CharacterMovement Movement => _movement;
@@ -38,5 +38,17 @@ public class CharacterHandler : PoolMonoBehaviour {
 
     public void UpdateTime ( float t ) {
         Time += t;
+    }
+
+    public void StartDespawn ( System.Action onDespawn ) {
+        Movement.MoveOut( () => {
+            onDespawn?.Invoke();
+            Despawn();
+        } );
+    }
+
+    public override void Despawn () {
+        Tag.OnDespawn();
+        base.Despawn();
     }
 }
