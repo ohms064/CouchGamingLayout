@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement: {fileID: 5272437815924054476}
-  _twitchUser: {fileID: -4560646082254575368}
   _emotes: {fileID: 2710517979057837313}
   _chatManager: {fileID: 7362620850361085675}
   _tag: {fileID: 1488541195489628837}
@@ -76,7 +75,19 @@ MonoBehaviour:
       m_Calls: []
   OnMoveEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2710517979057837313}
+        m_TargetAssemblyTypeName: MessageToEmotion, Assembly-CSharp
+        m_MethodName: CheckEmotion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnSpawnComplete:
     m_PersistentCalls:
       m_Calls: []
@@ -104,7 +115,7 @@ MonoBehaviour:
     _animation: wrong
   - _regexPattern: \b(tqm|<3|te\s*quiero)
     _animation: love
-  _checksPerFrame: 1
+  _checksPerFrame: 3
 --- !u!114 &7362620850361085675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec8c04e2f1db1c40a5d8038836caad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _listeners:
+  - {fileID: 2710517979057837313}
 --- !u!114 &-4560646082254575368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,21 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6ec8cca600bc94490b5d8218b96d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onMessageReceived:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2710517979057837313}
-        m_TargetAssemblyTypeName: MessageToEmotion, Assembly-CSharp
-        m_MethodName: CheckMessage
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &98648777119032127
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,10 +363,34 @@ MonoBehaviour:
       Data: 
   _onEmote:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5100074090970400070}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _onEmoteEnd:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5100074090970400070}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &98648777141651884
 GameObject:
   m_ObjectHideFlags: 0

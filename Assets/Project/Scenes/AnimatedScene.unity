@@ -1906,10 +1906,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced7af52c69702f469d6f692fac895ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawner: {fileID: 1387305196}
-  _chatUsers: {fileID: 11400000, guid: 072166ee917770b4280bcffa8da36b92, type: 2}
-  _talkingDistance: 0.6
-  _chatTime: 1.2
 --- !u!114 &800106325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2366,7 +2362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolSize: 20
   PoolMonoBehaviours:
-  - {fileID: 5272437815924054476, guid: 2bfb8298d0aa3ae46a851147365fe082, type: 3}
+  - {fileID: 3569027178544911582, guid: 2bfb8298d0aa3ae46a851147365fe082, type: 3}
   evenlyCreate: 0
 --- !u!4 &1387305198
 Transform:

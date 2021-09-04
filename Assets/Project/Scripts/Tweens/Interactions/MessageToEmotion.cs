@@ -4,7 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System.Text.RegularExpressions;
 
-public class MessageToEmotion : MonoBehaviour {
+public class MessageToEmotion : CharacterChatListener {
     [SerializeField, Required, InlineEditor]
     private TweenManager _manager;
     [SerializeField]
@@ -13,30 +13,41 @@ public class MessageToEmotion : MonoBehaviour {
     private int _checksPerFrame = 1;
 
     private Queue<System.Func<string>> _checkQueue;
+    private Queue<System.Action> _emotionQueue;
 
-    public void CheckMessage ( string message ) {
+    public override bool CheckMessage ( CharacterChatMessage message ) {
+        return true;
+    }
+
+    public override void ManageMessage ( CharacterChatMessage data ) {
         if ( !enabled ) enabled = true;
         foreach ( var emotion in _emotions ) {
-            _checkQueue.Enqueue( () => emotion.CheckMessage( message ) );
+            _checkQueue.Enqueue( () => emotion.CheckMessage( data.Message ) );
         }
+    }
+
+    public void CheckEmotion () {
+        if ( _emotionQueue.Count == 0 ) return;
+        _emotionQueue.Dequeue().Invoke();
     }
 
     private void Awake () {
         _checkQueue = new Queue<System.Func<string>>();
+        _emotionQueue = new Queue<System.Action>();
         foreach ( var emotion in _emotions ) {
             emotion.BuildRegex();
         }
     }
 
     private void Update () {
-        if ( _checkQueue.Count == 0 ) {
-            enabled = false;
-            return;
-        }
         for ( int i = 0; i < _checksPerFrame; i++ ) {
+            if ( _checkQueue.Count == 0 ) {
+                enabled = false;
+                return;
+            }
             var result = _checkQueue.Dequeue().Invoke();
             if ( !string.IsNullOrEmpty( result ) ) {
-                _manager.SetEmotion( result );
+                _emotionQueue.Enqueue( () => _manager.SetEmotion( result ) );
             }
         }
     }
