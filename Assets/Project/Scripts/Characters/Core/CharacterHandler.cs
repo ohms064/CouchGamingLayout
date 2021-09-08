@@ -13,6 +13,8 @@ public class CharacterHandler : PoolMonoBehaviour {
     private NameTag _tag;
     [SerializeField, Required]
     private EmojiParticles _emoji;
+    [SerializeField, Required]
+    private CharacterAnimation _animation;
 
     [ShowInInspector, HideInEditorMode, DisableInPlayMode]
     public float Time { get; private set; }
@@ -22,6 +24,7 @@ public class CharacterHandler : PoolMonoBehaviour {
     public NameTag Tag => _tag;
     public CharacterChatManager ChatManager => _chatManager;
     public EmojiParticles Emojis => _emoji;
+    public CharacterAnimation Animation => _animation;
 
     public void Spawn ( Vector3 position, Vector3 target, MoveArea area, TwitchEmoteManager emoteManager, CharacterChatMessage message, int priority, bool randomMove = true ) {
         base.Spawn( position );
@@ -30,6 +33,7 @@ public class CharacterHandler : PoolMonoBehaviour {
         ChatManager.ReceiveMessage( message );
         Tag.OnSpawn( priority, message.UserName );
         Emojis.OnSpawn( emoteManager );
+        Animation.OnSpawn();
     }
 
     public void Spawn ( Vector3 position, MoveArea area, TwitchEmoteManager emoteManager, CharacterChatMessage message, int priority, bool randomMove = true ) {
@@ -39,6 +43,7 @@ public class CharacterHandler : PoolMonoBehaviour {
         ChatManager.ReceiveMessage( message );
         Tag.OnSpawn( priority, message.UserName );
         Emojis.OnSpawn( emoteManager );
+        Animation.OnSpawn();
     }
 
     public void UpdateTime ( float t ) {

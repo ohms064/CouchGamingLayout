@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8a02af77a3676e4eb88c1555c78d295, type: 3}
+  m_Name: Blue_Animation
+  m_EditorClassIdentifier: 
+  _idleAnimation:
+    _sprites:
+    - {fileID: -1193820911090328509, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -4782104476085066544, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 5457486430018742753, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -6998530912514391803, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    _changeRate: 0.1
+  _moveAnimation:
+    _sprites:
+    - {fileID: 3980471565588570874, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -1273391385274323691, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -4508140695509116639, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 5167926156991472794, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -5589726636969511265, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 6843668749568235812, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    _changeRate: 0.1
+  _runAnimation:
+    _sprites:
+    - {fileID: 5790736894352482622, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 1017339619195510989, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 2435977642620248713, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -2169900482024534249, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 5122917098507624081, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 3715301444612607779, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -1725305482119995535, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    _changeRate: 0.1
+  _attackAnimation:
+    _sprites:
+    - {fileID: -779620069307929898, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -4973719480991979858, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -856149755822829703, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 9005231359350743733, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    _changeRate: 0.1
+  _hurtAnimation:
+    _sprites:
+    - {fileID: 9005231359350743733, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 6187166469564620892, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: 2344094080979329109, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    - {fileID: -3062889640021937877, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
+    _changeRate: 0.1

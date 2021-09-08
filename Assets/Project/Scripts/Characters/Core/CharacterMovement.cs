@@ -17,7 +17,9 @@ public class CharacterMovement : MonoBehaviour {
     [SerializeField]
     private Ease _moveEase;
     [SerializeField]
-    private UnityEvent OnMoveStart, OnMoveEnd, OnSpawnComplete;
+    private UnityMovementEvent _onMoveStart, _onMoveEnd;
+    [SerializeField]
+    private UnityEvent _onSpawnComplete;
 
     private Tween _moveTween;
     private Coroutine _moveRoutine, _resumeRoutine;
@@ -46,11 +48,11 @@ public class CharacterMovement : MonoBehaviour {
         //Debug.Log( $"Moving to {target}" );
 #endif
         CheckFlip( target );
-
+        var origin = transform.position;
         _moveTween = transform.DOMove( target, _moveTime ).SetEase( _moveEase );
-        _moveTween.OnStart( OnMoveStart.Invoke );
+        _moveTween.OnStart( () => _onMoveStart.Invoke( origin, target ) ); ;
         _moveTween.OnComplete( () => {
-            OnMoveEnd.Invoke();
+            _onMoveEnd.Invoke( origin, target );
             onMoveEnd?.Invoke();
             _moveTween = null;
         } );
@@ -61,13 +63,13 @@ public class CharacterMovement : MonoBehaviour {
         if ( _moveTween != null ) _moveTween.Kill();
     }
     public void OnSpawn ( MoveArea area, bool randomMove = true ) {
-        OnSpawn(  area.RandomLerp(), area, randomMove );
+        OnSpawn( area.RandomLerp(), area, randomMove );
     }
 
     public void OnSpawn ( Vector3 target, MoveArea area, bool randomMove = true ) {
         MovingLine = area;
         Move( target, () => {
-            OnSpawnComplete.Invoke();
+            _onSpawnComplete.Invoke();
             RandomMove = randomMove;
         } );
     }
