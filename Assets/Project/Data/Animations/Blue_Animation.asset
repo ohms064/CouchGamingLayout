@@ -18,7 +18,7 @@ MonoBehaviour:
     - {fileID: -4782104476085066544, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
     - {fileID: 5457486430018742753, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
     - {fileID: -6998530912514391803, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}
-    _changeRate: 0.1
+    _changeRate: 0.15
   _moveAnimation:
     _sprites:
     - {fileID: 3980471565588570874, guid: 1fe14028cc29d624ebf13760c5ba6fce, type: 3}

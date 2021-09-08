@@ -20,6 +20,8 @@ public class CharacterMovement : MonoBehaviour {
     private UnityMovementEvent _onMoveStart, _onMoveEnd;
     [SerializeField]
     private UnityEvent _onSpawnComplete;
+    [SerializeField]
+    private float _maxDistance = 4f;
 
     private Tween _moveTween;
     private Coroutine _moveRoutine, _resumeRoutine;
@@ -111,7 +113,8 @@ public class CharacterMovement : MonoBehaviour {
     private IEnumerator MoveRoutine () {
         while ( true ) {
             yield return new WaitForSeconds( RandomMoveInterval );
-            Move( MovingLine.RandomLerp() );
+            var target = MovingLine.RandomClampedLerp( transform.position, _maxDistance );
+            Move( target );
         }
     }
 

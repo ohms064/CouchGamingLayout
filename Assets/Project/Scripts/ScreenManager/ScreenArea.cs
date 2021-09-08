@@ -14,17 +14,36 @@ public class ScreenArea : MonoBehaviour {
     [SerializeField]
     private UnityPointEvent _onStartUpdated, _onEndUpdated;
 
-    private void FixedUpdate () {
-        var startPoint = _camera.ViewportToWorldPoint( _startViewportPoint );
-        var endPoint = _camera.ViewportToWorldPoint( _endViewportPoint );
-
-        startPoint.z = _startViewportPoint.z;
-        endPoint.z = _endViewportPoint.z;
-
-        _moveArea.UpdateLine( startPoint, endPoint );
+    private void Awake () {
+        var startPoint = GetStartPoint();
+        var endPoint = GetEndPoint(); ;
+        _moveArea.ForceUpdateLine( startPoint, endPoint );
         _onStartUpdated.Invoke( startPoint );
         _onEndUpdated.Invoke( endPoint );
     }
+
+    private void FixedUpdate () {
+        var startPoint = GetStartPoint();
+        var endPoint = GetEndPoint();
+
+        if ( !_moveArea.UpdateLine( startPoint, endPoint ) ) return;
+
+        _onStartUpdated.Invoke( startPoint );
+        _onEndUpdated.Invoke( endPoint );
+    }
+
+    private Vector3 GetStartPoint () {
+        var startPoint = _camera.ViewportToWorldPoint( _startViewportPoint );
+        startPoint.z = _startViewportPoint.z;
+        return startPoint;
+    }
+
+    private Vector3 GetEndPoint () {
+        var endPoint = _camera.ViewportToWorldPoint( _endViewportPoint );
+        endPoint.z = _endViewportPoint.z;
+        return endPoint;
+    }
 }
+
 [System.Serializable]
 public class UnityPointEvent : UnityEvent<Vector3> { }
