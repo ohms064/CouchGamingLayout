@@ -23,6 +23,26 @@ public class TwitchEmoteManager : MonoBehaviour {
         StartCoroutine( DownloadEmote( emoteUrl, callback ) );
     }
 
+    public void GetEmotes ( IEnumerable<string> emoteUrls, System.Action<IEnumerable<Texture2D>> callback ) {
+        var notInCache = ( from url in emoteUrls where !_emoteCache.ContainsKey( url ) select url ).ToList();
+        var inCache = ( from url in emoteUrls where _emoteCache.ContainsKey( url ) select url ).ToList();
+        var textures = ( from url in inCache select _emoteCache[url] ).ToList();
+
+        foreach ( var t in inCache ) {
+            _emoteQueue.Remove( t );
+            _emoteQueue.Add( t );
+        }
+
+        if ( notInCache.Count == 0 ) {
+            callback.Invoke( textures );
+            return;
+        }
+        StartCoroutine( DownloadEmotes( notInCache, ( results ) => {
+            textures.AddRange( results );
+            callback.Invoke( textures );
+        } ) );
+    }
+
     private IEnumerator DownloadEmote ( string url, System.Action<Texture2D> callback ) {
         using ( UnityWebRequest uwr = UnityWebRequestTexture.GetTexture( url ) ) {
             yield return uwr.SendWebRequest();
@@ -38,6 +58,26 @@ public class TwitchEmoteManager : MonoBehaviour {
                 callback.Invoke( texture );
             }
         }
+    }
+
+    private IEnumerator DownloadEmotes ( IEnumerable<string> urls, System.Action<IEnumerable<Texture2D>> callback ) {
+        List<Texture2D> results = new List<Texture2D>();
+        foreach ( var url in urls ) {
+            using ( UnityWebRequest uwr = UnityWebRequestTexture.GetTexture( url ) ) {
+                yield return uwr.SendWebRequest();
+
+                if ( uwr.result != UnityWebRequest.Result.Success ) {
+                    Debug.Log( uwr.error );
+                }
+                else {
+                    // Get downloaded asset bundle
+                    var texture = DownloadHandlerTexture.GetContent( uwr );
+                    AddEmoteToCache( url, texture );
+                    results.Add( texture );
+                }
+            }
+        }
+        callback.Invoke( results );
     }
 
     private void AddEmoteToCache ( string url, Texture2D texture ) {

@@ -11,7 +11,6 @@ public class TwitchChatManager : TwitchClientEventListener {
     private CharacterSpawner _spawner;
     [SerializeField]
     private float _maxIdleTime;
-
     [SerializeField, Required]
     private TwitchChatPool _chatUsers;
 
@@ -45,11 +44,12 @@ public class TwitchChatManager : TwitchClientEventListener {
 
     private CharacterChatMessage BuildCharacterChatMessage ( OnMessageReceivedArgs args ) {
         var chatMessage = args.ChatMessage;
+        var emoteSet = chatMessage.EmoteSet;
         var chatReply = chatMessage.ChatReply;
         CharacterChatMessage parentMessage = null;
         if ( chatReply != null ) {
-            parentMessage = new CharacterChatMessage( chatReply.ParentMsgBody, chatReply.ParentDisplayName, chatReply.ParentUserId, _chatUsers, null );
+            parentMessage = new CharacterChatMessage( chatReply.ParentMsgBody, chatReply.ParentDisplayName, chatReply.ParentUserId, _chatUsers, emoteSet, null );
         }
-        return new CharacterChatMessage( chatMessage.Message, chatMessage.DisplayName, chatMessage.UserId, _chatUsers, parentMessage );
+        return new CharacterChatMessage( chatMessage.Message, chatMessage.DisplayName, chatMessage.UserId, _chatUsers, emoteSet, parentMessage );
     }
 }

@@ -19,7 +19,7 @@ public class NameTag : MonoBehaviour {
     [ShowInInspector, HideInEditorMode, DisableInPlayMode]
     public int Priority { get; private set; }
     [ShowInInspector, HideInEditorMode, DisableInPlayMode]
-    public string Name { get => _textMesh.text; set => _textMesh.text = value; }
+    public string Name => _textMesh.text;
     [ShowInInspector, HideInEditorMode]
     public float Height { get; set; }
     public BoxCollider Collider => _collider;
@@ -36,11 +36,12 @@ public class NameTag : MonoBehaviour {
         }
     }
 
-    public void OnSpawn ( int priority ) {
+    public void OnSpawn ( int priority, string name ) {
         transform.SetParent( null );
         Priority = priority;
         Height = Manager.BaseHeight;
         enabled = true;
+        _textMesh.text = name;
     }
 
     public void OnDespawn () {
